@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 # set NODE_ENV to "development" or "production" (minimum log level and more cache levels)
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 # Use this path as the default location for all subsequent commands
 WORKDIR /app
@@ -12,8 +12,9 @@ COPY . .
 
 # Download/install dependencies in "node_modules" folder.
 RUN npm install
+#RUN npm ci
 #RUN npm install && npm cache clean --force
-
+RUN npm run build
 #Copy source code to image
 #COPY . .
 
