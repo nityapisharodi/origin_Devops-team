@@ -4,8 +4,8 @@ services:
 
   nodejs_frontend: # NodeJS Frontend Webserver
     build: # Build a NodeJS image with all needed dependencies
-      context: ./frontend # Use this base path for all commands in dockerfile
-      dockerfile: Dockerfile # Specify dockerfile path
+      context: . # Use this base path for all commands in dockerfile
+      dockerfile: ./Docker/Frontend/Dockerfile # Specify dockerfile path
       #working_dir: /app
    
     env_file: .env #read environment var values from this file
@@ -17,9 +17,9 @@ services:
     volumes:
       - ./frontend/src:/app/src
      
-    command: npm run start
+    #command: npm run start
     ports:
-      - "$FRONTEND_PORT:3000"
+      - "$FRONTEND_PORT:80"
     depends_on:
        - nodejs_backend # Must be removed when split Frontend/Backend
       
@@ -30,8 +30,8 @@ services:
 
   nodejs_backend: # NodeJS Backend Webserver
     build: # Build a NodeJS image with all needed dependencies
-      context: ./backend # Use this base path for all commands in dockerfile
-      dockerfile: Dockerfile # Specify dockerfile path
+      context: . # Use this base path for all commands in dockerfile
+      dockerfile: ./Docker/Backend/Dockerfile # Specify dockerfile path
       #working_dir: /usr/app
     #command: bash -c "npm install && npm run start"
     env_file: .env #read environment var values from this file
@@ -43,7 +43,7 @@ services:
     volumes:
       - ./backend/src:/app/src
      
-    command: npm run dev
+    #command: npm run dev
     ports:
       - "$BACKEND_PORT:3000"
     # depends_on:

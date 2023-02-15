@@ -1,14 +1,11 @@
 FROM node:18-alpine
 
-# set NODE_ENV to "development" or "production" (minimum log level and more cache levels)
-ENV NODE_ENV=development
-
 # Use this path as the default location for all subsequent commands
 WORKDIR /app
 
 # Copy package.json and package-lock.json files into our image before run "npm install".
 #COPY package*.json .
-COPY . .
+COPY ./backend .
 
 # Download/install dependencies in "node_modules" folder.
 RUN npm install
